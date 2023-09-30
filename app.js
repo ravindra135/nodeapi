@@ -1,0 +1,12 @@
+const express = require('express');
+const app = express();
+
+app.get("/", function(req, res) {
+    res.send("Hello World from Node JS");
+});
+
+// app.listen(8080);
+const port = 8080;
+app.listen(port, () => {
+    console.log(`Node App listening on ${port}`);
+});
