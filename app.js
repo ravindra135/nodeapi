@@ -21,7 +21,9 @@ app.use(morgan("dev"));
 // Demo
 // app.use(customMiddleware);
 
-app.get('/', getPosts);
+// app.get('/', getPosts);
+app.use('/', getPosts);
+//-> Here `get` has been changed to `use` as now we are using express router;
 
 //-> This way you can protect your individual route with middleware
 // app.get('/', customMiddleware, getPosts);
