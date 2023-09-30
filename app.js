@@ -1,6 +1,20 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 const morgan = require('morgan');
+
+var url = "mongodb://127.0.0.1:27017/local";
+
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB successfully');
+  mongoose.connection.close();
+});
+
 
 // app.get("/", function(req, res) {
 //     res.send("Hello World from Node JS");
