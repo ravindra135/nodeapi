@@ -7,7 +7,8 @@ const morgan = require('morgan');
 // });
 
 // Routes Seperated;
-const { getPosts } = require('./routes/post');
+// const { getPosts } = require('./routes/post');
+const postRoutes = require('./routes/post');
 
 // Demo: Creating custom middleware
 // const customMiddleware = (req, res, next) => {
@@ -22,8 +23,9 @@ app.use(morgan("dev"));
 // app.use(customMiddleware);
 
 // app.get('/', getPosts);
-app.use('/', getPosts);
+app.use('/', postRoutes);
 //-> Here `get` has been changed to `use` as now we are using express router;
+//-> Now use need takes a route, and a middleware as a parameter;
 
 //-> This way you can protect your individual route with middleware
 // app.get('/', customMiddleware, getPosts);
