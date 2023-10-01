@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const bodyParser = require('body-parser'); 
+const expressValidator = require('express-validator');
+const bodyParser = require('body-parser');
 
 var url = "mongodb://127.0.0.1:27017/local";
 
@@ -33,6 +34,7 @@ const postRoutes = require('./routes/post');
 
 // Middleware using Morgan;
 app.use(morgan("dev"));
+app.use(expressValidator);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Demo: Using Custom Middleware

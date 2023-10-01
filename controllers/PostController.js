@@ -40,7 +40,14 @@ exports.createPost = (req, res) => {
 
     try {
         const post = new PostModel(req.body);
-        post.save();
+        // post.save();
+
+        post.save().then(result => {
+            res.status(200).json({
+                post: result
+            });
+        });
+
     } catch (e) {
         console.log(e.getMessage());
     }
