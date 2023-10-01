@@ -1,3 +1,5 @@
+const PostModel = require('../models/PostModel');
+
 exports.getPosts = (req, res) => {
     // res.send("Hello World from Node JS!");
     res.json({
@@ -15,3 +17,31 @@ exports.getPosts = (req, res) => {
         ]
     });
 }
+
+exports.createPost = (req, res) => {
+    // const post = new PostModel(req.body);
+    // console.log("Creating Post: ", req.body);
+
+    /*
+    * This approach has been deprecated in recent versions of mongoose;
+    *
+    post.save((err, result) => {
+        if(err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
+
+        res.status(200).json({
+            post: result
+        });
+    });
+    */
+
+    try {
+        const post = new PostModel(req.body);
+        post.save();
+    } catch (e) {
+        console.log(e.getMessage());
+    }
+}; 

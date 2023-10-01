@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const bodyParser = require('body-parser'); 
 
 var url = "mongodb://127.0.0.1:27017/local";
 
@@ -12,7 +13,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB successfully');
-  mongoose.connection.close();
+  // mongoose.connection.close();
 });
 
 
@@ -32,11 +33,13 @@ const postRoutes = require('./routes/post');
 
 // Middleware using Morgan;
 app.use(morgan("dev"));
-
-// Demo
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// Demo: Using Custom Middleware
 // app.use(customMiddleware);
 
 // app.get('/', getPosts);
+
 app.use('/', postRoutes);
 //-> Here `get` has been changed to `use` as now we are using express router;
 //-> Now use need takes a route, and a middleware as a parameter;
